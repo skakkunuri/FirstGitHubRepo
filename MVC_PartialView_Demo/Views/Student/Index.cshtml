@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MVC_PartialView_Demo.Models.Employee>
+
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+@{
+    ViewBag.Title = "Employees list";
+}
+
+<h2>List of employees</h2>
+@DateTime.Now.ToLongTimeString()
+
+@using (@Html.BeginForm())
+{
+    <b>Enter name:</b>
+    @Html.TextBox("searchTerm",null,new {id="txtSearch"})
+    <input type="submit" value="Search" id="cmdSearch" />
+}
+
+<div>
+    <span>
+        @Ajax.ActionLink("All", "All", new AjaxOptions()
+   {
+       HttpMethod = "GET",
+       UpdateTargetId = "divData",
+       InsertionMode = InsertionMode.Replace
+   })
+    </span> | <span>
+                  @Ajax.ActionLink("Top 2", "Top3", new AjaxOptions()
+                  {
+                      HttpMethod = "GET",
+                      UpdateTargetId = "divData",
+                      InsertionMode = InsertionMode.Replace
+                  })
+    </span> | <span>
+                  @Ajax.ActionLink("Bottom 3", "Bottom3", new AjaxOptions()
+                  {
+                      HttpMethod = "GET",
+                      UpdateTargetId = "divData",
+                      InsertionMode = InsertionMode.Replace
+                  })
+    </span>
+
+</div>
+
+<div id="divData">
+    
+</div>
